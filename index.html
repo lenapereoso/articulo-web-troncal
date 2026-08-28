@@ -1,1 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La construcción y propagación del discurso tradwife en redes sociales</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fffcfe;
+    --ink: #2b2420;
+    --ink-light: #5c4f45;
+    --ink-faint: #a89a8d;
+    --rose: #b5697a;
+    --rose-dim: #d9a8b3;
+    --rose-wash: rgba(107, 36, 52, 0.08);
+    --sage: #3e174c;
+    --sage-dim: #461e3d;
+    --sage-wash: rgba(75, 88, 66, 0.07);
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --body: 'Lora', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
 
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.72;
+  }
+
+ 
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.2rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+  }
+  .masthead-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .journal-name {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .journal-meta {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    text-align: right;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 3rem 0; }
+  section + section { border-top: 1px solid var(--rule); }
+
+
+  .article-header { padding-top: 4rem; padding-bottom: 3rem; }
+  .article-type {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .article-type::before {
+    content: '#fyp';
+    border: 1px solid var(--rose-dim);
+    color: var(--rose);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .subtitle {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--sage);
+    margin-bottom: 2rem;
+    max-width: 680px;
+  }
+  .research-question {
+    border-left: 2px solid var(--rose-dim);
+    background: var(--rose-wash);
+    padding: 1.2rem 1.6rem;
+    max-width: 700px;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 2.2rem;
+  }
+  .research-question cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .authors-block { margin-bottom: 2rem; }
+  .authors-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.6rem;
+  }
+  .authors-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
+  .authors-list li { font-size: 1rem; color: var(--ink); }
+  .authors-list li a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .author-sup {
+    font-size: 0.65em;
+    vertical-align: super;
+    font-family: var(--mono);
+    color: var(--rose);
+    margin-left: 1px;
+  }
+  .affiliations { margin-top: 0.9rem; font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; }
+  .aff-num { font-family: var(--mono); color: var(--rose); margin-right: 0.4rem; font-size: 0.72em; }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 1.6rem;
+  }
+  .meta-item { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+  .meta-item span { color: var(--ink-light); text-transform: none; letter-spacing: 0; font-size: 0.78rem; }
+
+  
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    color: var(--sage);
+    background: var(--sage-wash);
+    border: 1px solid var(--rule);
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 1.4rem;
+  }
+  .section-label::before { content: '#'; margin-right: 0.15rem; color: var(--rose); }
+
+  h2.section-title {
+    font-family: var(--display);
+    font-size: 1.9rem;
+    font-weight: 500;
+    margin-bottom: 1.3rem;
+    color: var(--ink);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--sage);
+    margin: 1.6rem 0 0.7rem;
+  }
+
+
+  .abstract-box {
+    background: var(--rose-wash);
+    border-left: 2px solid var(--rose);
+    padding: 1.6rem 2rem;
+  }
+  .abstract-box p { font-size: 1rem; color: var(--ink-light); text-align: justify; hyphens: auto; }
+  .abstract-box p + p { margin-top: 0.9rem; }
+  .abstract-box strong { color: var(--ink); font-family: var(--mono); font-size: 0.82em; letter-spacing: 0.02em; }
+
+  .keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+  .keyword {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--rule);
+    color: var(--ink-light);
+    background: transparent;
+    border-radius: 999px;
+  }
+
+
+  .body-text p { text-align: justify; hyphens: auto; margin-bottom: 1.1rem; color: var(--ink); }
+  .body-text p:last-child { margin-bottom: 0; }
+
+  blockquote {
+    margin: 1.8rem 0;
+    padding: 1rem 1.6rem;
+    border-left: 2px solid var(--sage-dim);
+    background: var(--sage-wash);
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+
+  .table-wrapper { overflow-x: auto; margin: 1.5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead tr { border-bottom: 2px solid var(--ink); }
+  thead th { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); padding: 0.6rem 0.8rem; text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--rule); }
+  tbody td { padding: 0.6rem 0.8rem; color: var(--ink); }
+  .table-caption { font-size: 0.82rem; color: var(--ink-faint); font-style: italic; margin-top: 0.5rem; }
+
+
+  .img-grid {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1.8rem 0;
+  }
+  .img-grid-2 { grid-template-columns: 1fr 1fr; }
+  .img-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .img-grid figure { margin: 0; }
+  .img-grid img,
+  figure.img-single img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--sage-wash);
+  }
+  figure.img-single {
+    margin: 1.8rem 0;
+    max-width: 560px;
+  }
+  figure.img-single.centered { margin-left: auto; margin-right: auto; }
+  figcaption {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  figcaption .fig-num { color: var(--rose); font-weight: 500; }
+  .figures-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem 1.2rem;
+    margin: 1.8rem 0;
+  }
+  .figures-block figure { margin: 0; }
+
+  @media (max-width: 600px) {
+    .img-grid-2, .img-grid-3, .figures-block { grid-template-columns: 1fr; }
+  }
+
+
+  .pending {
+    border: 1px dashed var(--rose-dim);
+    background: repeating-linear-gradient(45deg, var(--rose-wash) 0px, var(--rose-wash) 1px, transparent 1px, transparent 10px);
+    padding: 1.6rem 1.8rem;
+    color: var(--ink-faint);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+  .pending strong { color: var(--rose); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.7rem; display: block; margin-bottom: 0.5rem; }
+
+
+  .references-list { list-style: none; }
+  .references-list li {
+    display: block;
+    padding-left: 2rem;
+    text-indent: -2rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.55;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0 3rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  footer a { color: inherit; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .container { padding: 0 1.2rem; }
+    .abstract-box { padding: 1.2rem 1.2rem; }
+    h1 { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="journal-name">Diseño y Visualización de Información</div>
+    <div class="journal-meta">Sesgos, desinformación y algoritmos · 2026</div>
+  </div>
+</header>
+
+<main class="container">
+
+
+  <section id="encabezado" class="article-header">
+    <div class="article-type">Artículo de Investigación</div>
+    <h1>La construcción y propagación del discurso tradwife en redes sociales</h1>
+    <p class="subtitle">Algoritmos, estética e ideología en el auge del conservadurismo digital</p>
+
+    <blockquote class="research-question">
+      ¿Cómo contribuyen los algoritmos y la estética de las redes sociales a la normalización y propagación del discurso tradwife asociado a valores conservadores?
+      Pregunta de investigación
+    </blockquote>
+
+    <div class="authors-block">
+      <p class="authors-label">Autoría</p>
+      <ul class="authors-list">
+       <li><a href="https://github.com/CarolMabel">Carol Álvarez</a><span class="author-sup"></span></li>
+        <li><a href="https://github.com/fcaconcha">Francisca Concha</a><span class="author-sup"></span></li>
+        <li><a href="https://github.com/millarraycvo">Millarray Villagra</a><span class="author-sup"></span></li>
+        <li><a href="https://github.com/lenapereoso">Renata Pereira</a><span class="author-sup"></span></li>
+      </ul>
+      <div class="affiliations">
+        <p><span class="aff-num"></span>Estudiantes de Diseño — Universidad de Chile, Santiago, Chile</p>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-item">Curso&nbsp;<span>Diseño y Visualización de Información</span></div>
+      <div class="meta-item">Entrega&nbsp;<span>Sumativa · 20%</span></div>
+    </div>
+  </section>
+
+
+  <section id="resumen">
+    <span class="section-label">resumen</span>
+    <div class="abstract-box">
+      <p><strong>Introducción —</strong> El fenómeno tradwife ha adquirido creciente visibilidad en redes sociales, específicamente TikTok; mediante contenidos que representan una feminidad vinculada al matrimonio, la maternidad y el trabajo doméstico. Su difusión consiste en una estética construida sobre discursos de roles de género, generando un espacio donde contenidos aparentemente asociados a tendencias pueden adquirir dimensiones ideológicas y políticas.</p>
+      <p><strong>Objetivo —</strong> Este artículo busca analizar cómo la estética del contenido tradwife y el algoritmo de TikTok contribuyen a la circulación y visibilización de discursos asociados al conservadurismo. Se busca identificar de qué manera la presentación de estos contenidos influye en su interpretación e idealización de los usuarios que consumen este contenido.</p>
+      <p><strong>Métodos —</strong> Mediante un análisis mixto de publicaciones de TikTok relacionadas con tendencias de estética, estilo de vida y discursos asociados al fenómeno tradwife se recopilaron y analizaron publicaciones que permitían observar un posible recorrido entre contenidos inicialmente alejados de la política hasta discursos conservadores explícitos. El análisis considerará elementos visuales, temáticas, discursos y formas de representación, distinguiendo entre tendencias de estética personal, estilos de vida, roles tradicionales de género y contenido político.</p>
+      <p><strong>Resultados —</strong> Los datos recopilados permitirán identificar la relación entre las tendencias estéticas utilizadas por las creadoras tradwife y la incorporación progresiva de discursos relacionados con roles tradicionales de género. La visualización de las categorías permitirá observar cómo contenidos domésticos, aspiracionales e ideológicos pueden coexistir dentro de un mismo ecosistema de publicaciones.</p>
+      <p><strong>Conclusiones —</strong> El fenómeno tradwife muestra que la información difundida en plataformas digitales no es neutral, sino que depende de procesos de selección, organización y circulación. La estética puede ayudar a mostrar ciertas posiciones ideológicas como estilos de vida, y la estética también puede aumentar la exposición y la visibilidad de la información difundida en plataformas digitales.</p>
+    </div>
+    <div style="margin-top:1.2rem;">
+      <p class="authors-label">Palabras clave</p>
+      <div class="keywords">
+        <span class="keyword">Tradwife</span>
+        <span class="keyword">Algoritmos</span>
+        <span class="keyword">Estética digital</span>
+        <span class="keyword">Conservadurismo</span>
+        <span class="keyword">Data Feminism</span>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="introduccion">
+    <span class="section-label">introducción</span>
+    <h2 class="section-title">Introducción</h2>
+
+    <h3>Redes sociales y nuevas formas de información</h3>
+    <div class="body-text">
+      <p>Durante los últimos años, las redes sociales han transformado la manera en que las personas acceden, producen y comparten información. Plataformas como TikTok funcionan tanto como espacios de entretenimiento como entornos donde se construyen representaciones sobre identidad, género, familia y formas de vida. En este contexto ha adquirido visibilidad el fenómeno denominado tradwife, abreviación de traditional wife, que refiere a mujeres que presentan en redes sociales una vida asociada a roles tradicionales de género, especialmente el matrimonio, la maternidad y la dedicación al hogar.</p>
+    </div>
+
+    <h3>Cuando el estilo de vida comunica</h3>
+    <div class="body-text">
+      <p>Una característica relevante del fenómeno es el uso de recursos propios del contenido lifestyle: preparación de alimentos, cuidado del hogar, vestimenta, maternidad, jardinería y rutinas familiares. Esta dimensión estética puede presentar determinadas concepciones sobre la feminidad como elecciones personales o estilos de vida, aun cuando algunas creadoras incorporan explícitamente discursos antifeministas, religiosos o vinculados con posiciones conservadoras. Investigaciones recientes han identificado precisamente esta relación entre la estética tradwife, los roles tradicionales de género y discursos de derecha en plataformas digitales.</p>
+    </div>
+
+    <h3>¿Qué nos muestra el algoritmo?</h3>
+    <div class="body-text">
+      <p>El fenómeno resulta especialmente relevante desde el estudio de la información, debido a que aquello que los usuarios observan en las plataformas no constituye una representación neutral de la realidad. Los sistemas de recomendación organizan contenidos a partir de grandes cantidades de datos derivados de las interacciones de los usuarios, determinando qué publicaciones adquieren mayor visibilidad. De esta manera, la circulación de información se encuentra condicionada tanto por las decisiones de quienes producen contenido como por los sistemas que lo distribuyen.</p>
+    </div>
+
+    <h3>Del lifestyle al discurso político</h3>
+    <div class="body-text">
+      <p>A partir de esta problemática, la presente investigación busca analizar cómo el contenido tradwife y los sistemas de recomendación de TikTok contribuyen a la visibilización y normalización de discursos asociados al conservadurismo. Para ello, se estudiarán publicaciones de la plataforma considerando sus elementos visuales, temáticos y discursivos, con el propósito de identificar cómo contenidos presentados inicialmente como estilos de vida pueden adquirir y transmitir dimensiones ideológicas.</p>
+    </div>
+  </section>
+
+
+  <section id="marco-teorico">
+    <span class="section-label">marco teórico</span>
+    <h2 class="section-title">Marco teórico</h2>
+
+    <h3>La información no es neutral</h3>
+    <div class="body-text">
+      <p>La comprensión del fenómeno tradwife desde el estudio de la información requiere cuestionar la idea de que los datos y los sistemas que los organizan constituyen representaciones neutrales de la realidad. El modelo DIKW propone una relación jerárquica entre datos, información, conocimiento y sabiduría; sin embargo, Baker y Chakraborty (2025) cuestionan esta estructura, señalando que no considera suficientemente la aparición de tecnologías como el big data y la inteligencia artificial, que han intensificado la investigación sobre la desinformación, la información errónea y la ignorancia, aspectos que quedan fuera de la pirámide DIKW. Esta crítica resulta relevante para analizar las plataformas digitales, donde grandes cantidades de datos de interacción son procesadas para producir recomendaciones de contenido.</p>
+    </div>
+
+    <h3>Datos, poder y algoritmos</h3>
+    <div class="body-text">
+      <p>Desde una perspectiva crítica, D'Ignazio y Klein (2020) plantean que los datos deben comprenderse en relación con el poder.</p>
+    </div>
+    <blockquote>
+      Su propuesta de Data Feminism cuestiona quién produce los datos, qué realidades son representadas y cuáles son discriminadas.
+      D'Ignazio &amp; Klein, 2020
+    </blockquote>
+    <div class="body-text">
+      <p>En las plataformas digitales, esta problemática puede observarse en los algoritmos, que seleccionan y ordenan contenidos a partir de comportamientos medibles como visualizaciones, interacciones y tiempo de permanencia. Por lo tanto, aquello que aparece reiteradamente ante un usuario no constituye necesariamente una representación proporcional de los contenidos existentes, sino el resultado de procesos de selección mediados por la infraestructura algorítmica.</p>
+    </div>
+
+    <h3>De la estética a la ideología</h3>
+    <div class="body-text">
+      <p>Esta perspectiva permite abordar el movimiento tradwife como una tendencia estética que utiliza las redes sociales para convertir en mercancía versiones tradicionales y heteronormativas de la feminidad. Sykes y Hopner (2024) identifican la presencia de discursos asociados a posiciones de derecha dentro del contenido producido por tradwives, destacando además la capacidad de TikTok para ampliar su alcance mediante formatos breves, tendencias y sistemas de recomendación.</p>
+      <p>Para profundizar en cómo las plataformas y los creadores entrelazan la estética cotidiana con mensajes ideológicos, Castelló-Martínez (2026) analiza el impacto del fenómeno tradwife a través del estudio de casos virales en redes sociales. La investigación señala que este tipo de contenido muestra rutinas domésticas de forma aislada y utiliza una cuidada puesta en escena estética para mercantilizar los roles tradicionales de género. De este modo, las publicaciones logran conectar el entretenimiento visual con discursos conservadores y estrategias de visibilización digital, facilitando que los usuarios normalicen estas narrativas bajo la apariencia de un estilo de vida aspiracional y cotidiano.</p>
+      <p>Investigaciones más recientes profundizan esta relación. Rempel y Hannan (2026) caracterizan la retórica tradwife como una forma de discurso reaccionario que puede presentar una estética aparentemente apolítica mientras promueve concepciones específicas sobre la subordinación y los roles de género. De esta manera, el fenómeno permite estudiar cómo la organización de datos, la selección algorítmica y las estrategias visuales intervienen en la construcción y circulación de información que no es neutral.</p>
+    </div>
+  </section>
+
+
+  <section id="metodos">
+    <span class="section-label">métodos</span>
+    <h2 class="section-title">Métodos</h2>
+
+    <h3>¿Por dónde comienza?</h3>
+    <div class="body-text">
+      <p>Para observar cómo un discurso político puede aparecer dentro de contenidos que inicialmente parecen alejados de la política, se seleccionaron publicaciones de TikTok asociadas a distintas tendencias de estética y estilo de vida que circulan ampliamente en redes sociales. Entre ellas se consideraron clean look, coquette, old money, women of value, princess treatment y contenidos relacionados con los llamados "princesos". Estas tendencias fueron utilizadas como punto de partida, ya que permiten identificar distintas formas de representar la feminidad, la imagen personal y las relaciones de pareja antes de llegar a contenidos políticos explícitos.</p>
+    </div>
+
+    <div class="img-grid img-grid-2">
+      <figure><img src="./img/img1.webp"/></figure>
+      <figure><img src="./img/img2.webp"/></figure>
+    </div>
+
+    <div class="body-text">
+      <p>El análisis consideró tanto los elementos visuales de las publicaciones como los conceptos y discursos presentes en ellas. Se observaron aspectos como vestimenta, maquillaje, espacios domésticos, actividades cotidianas, maternidad, relaciones de pareja y formas de representar los roles de género.</p>
+    </div>
+
+    <h3>Del estilo de vida al personaje</h3>
+    <div class="body-text">
+      <p>Posteriormente, se incorporaron publicaciones de creadoras de contenido como Roro y Nara Smith, debido a que sus contenidos combinan elementos de estética, vida cotidiana y actividades domésticas. En esta etapa se buscó identificar la presencia de códigos previamente observados en las tendencias analizadas y su relación con representaciones de feminidad, pareja, maternidad y domesticidad. La selección de estas creadoras no implica clasificarlas como tradwives, sino utilizarlas como casos para observar las asociaciones que pueden producirse entre diferentes contenidos dentro de la plataforma.</p>
+    </div>
+
+    <div class="img-grid img-grid-3">
+      <figure><img src="./img/img3.webp"/></figure>
+      <figure><img src="./img/img4.webp"/></figure>
+      <figure><img src="./img/img5.webp"/></figure>
+    </div>
+    <div class="img-grid img-grid-3">
+      <figure><img src="./img/img6.webp"/></figure>
+      <figure><img src="./img/img7.webp"/></figure>
+      <figure><img src="./img/img8.webp"/></figure>
+    </div>
+
+    <h3>Cuando aparece el discurso político</h3>
+    <div class="body-text">
+      <p>Finalmente, se analizaron publicaciones de figuras vinculadas directamente con discursos políticos y conservadores, como Erika Kirk. De esta manera, el contenido recopilado se organizó en cuatro categorías principales: estética, estilo de vida, roles tradicionales de género y discurso político. La información obtenida fue comparada para identificar elementos compartidos y posibles conexiones entre las categorías, considerando especialmente la manera en que el sistema de recomendaciones puede relacionar contenidos a partir de sus características visuales y temáticas.</p>
+    </div>
+
+    <div class="img-grid img-grid-2">
+      <figure><img src="./img/img9.webp"/></figure>
+      <figure><img src="./img/img10.webp"/></figure>
+    </div>
+  </section>
+
+
+  <section id="resultados">
+    <span class="section-label">resultados</span>
+    <h2 class="section-title">Resultados</h2>
+
+    <h3>Del clean look al discurso político</h3>
+    <div class="body-text">
+      <p>La organización de los datos permitió identificar una relación entre contenidos que, aunque presentan temáticas diferentes, comparten determinados códigos visuales y discursivos. Las publicaciones analizadas se distribuyeron principalmente entre cuatro categorías: estética, estilo de vida, roles tradicionales de género y discurso político. Esta clasificación permitió visualizar un recorrido en el que los contenidos no aparecen necesariamente como elementos aislados, sino como parte de un mismo ecosistema de circulación.</p>
+      <p>En el primer nivel se concentraron tendencias como clean look, coquette y old money, caracterizadas por una fuerte construcción visual de la feminidad y por estilos de vida aspiracionales. Al avanzar hacia contenidos de lifestyle, aparecieron con mayor frecuencia representaciones relacionadas con la cocina, el hogar, la pareja y la maternidad. Posteriormente, estos elementos se relacionaron con discursos más explícitos sobre los roles que deberían cumplir hombres y mujeres.</p>
+    </div>
+
+    <div class="img-grid img-grid-2">
+      <figure><img src="./img/img11.webp"/></figure>
+      <figure><img src="./img/img12.webp"/></figure>
+    </div>
+    <div class="img-grid img-grid-2">
+      <figure><img src="./img/img13.webp"/></figure>
+      <figure><img src="./img/img14.webp"/></figure>
+    </div>
+
+    <h3>¿Qué conexiones aparecen?</h3>
+    <div class="body-text">
+      <p>Uno de los principales hallazgos corresponde a la proximidad entre contenidos estéticos y discursos relacionados con valores tradicionales. Los datos muestran que determinados recursos visuales pueden reaparecer en publicaciones con contenidos diferentes, permitiendo establecer asociaciones entre tendencias, creadoras de lifestyle y discursos políticos. En este recorrido, el contenido conservador aparece como una categoría posterior y más explícita, representada por figuras como Erika Kirk.</p>
+      <p>La visualización de los datos permite representar esta relación como un recorrido entre estética, estilo de vida, roles tradicionales de género y discurso político.</p>
+    </div>
+
+    <div class="figures-block">
+      <figure>
+          <img src="./img/img15.webp"/>
+        <figcaption><span class="fig-num">Figura 1.</span> Estado civil de las influencers tradwife incluidas en la muestra.</figcaption>
+      </figure>
+      <figure>
+          <img src="./img/img16.webp"/>
+        <figcaption><span class="fig-num">Figura 2.</span> Estado de maternidad de las influencers tradwife incluidas en la muestra.</figcaption>
+      </figure>
+      <figure>
+          <img src="./img/img17.webp"/>
+        <figcaption><span class="fig-num">Figura 3.</span> Creencias religiosas de las influencers tradwife de la muestra.</figcaption>
+      </figure>
+      <figure>
+          <img src="./img/img18.webp"/>
+        <figcaption><span class="fig-num">Figura 4.</span> Representación racial de las influencers tradwife incluidas en la muestra.</figcaption>
+      </figure>
+    </div>
+
+    <div class="body-text">
+      <p>Sin embargo, esta secuencia no significa que el consumo de una tendencia como clean look produzca necesariamente una orientación conservadora. Tampoco permite afirmar que las creadoras analizadas compartan las mismas posiciones políticas.</p>
+          <div class="img-grid img-grid-2">
+      <figure><img src="./img/img19.webp"/></figure>
+
+    </div>
+      <p>Lo que los resultados permiten evidenciar es que el sistema de recomendaciones puede generar un espacio donde contenidos inicialmente asociados al entretenimiento, la belleza o el estilo de vida aparecen próximos a discursos de carácter ideológico. Así, la repetición y conexión entre publicaciones puede contribuir a que determinadas representaciones de feminidad y relaciones tradicionales adquieran mayor visibilidad dentro del entorno digital.</p>
+    </div>
+
+    <figure class="img-single centered">
+        <img src="./img/img20.webp"/>
+      <figcaption>Método de visualización</figcaption>
+    </figure>
+  </section>
+
+
+  <section id="conclusion">
+    <span class="section-label">conclusión</span>
+    <h2 class="section-title">Conclusión</h2>
+
+    <h3>Más allá de una estética</h3>
+    <div class="body-text">
+      <p>El análisis del fenómeno tradwife permite comprender que su presencia en redes sociales no puede reducirse únicamente a una tendencia estética o a una representación de la vida doméstica. Los contenidos analizados muestran que elementos asociados al cuidado personal, la belleza, la vestimenta y los estilos de vida aspiracionales pueden coexistir con representaciones de la maternidad, las relaciones de pareja y los roles tradicionales de género. Esta conexión permite que determinadas ideas circulen inicialmente como contenidos cotidianos o de entretenimiento, antes de adquirir dimensiones ideológicas más explícitas.</p>
+    </div>
+
+    <h3>Cuando la información no es neutral</h3>
+    <div class="body-text">
+      <p>En este contexto, el algoritmo adquiere relevancia al participar en la organización y circulación de los contenidos que los usuarios encuentran en la plataforma. A partir de datos derivados de las interacciones, los sistemas de recomendación pueden establecer proximidades entre publicaciones que comparten características visuales o temáticas. Esto no significa que consumir una tendencia como clean look conduzca necesariamente hacia una posición conservadora, sino que diferentes contenidos pueden encontrarse dentro de un mismo ecosistema de información.</p>
+      <p>El fenómeno tradwife evidencia así la relación entre estética, ideología y circulación digital. La presentación de determinados roles de género como estilos de vida aspiracionales puede contribuir a normalizar representaciones tradicionales, especialmente cuando estas coexisten con discursos conservadores explícitos.</p>
+      <p>Desde la perspectiva del estudio de la información, este caso demuestra que los datos no hablan por sí mismos: son seleccionados, organizados y distribuidos mediante sistemas que determinan qué contenidos adquieren visibilidad. Por ello, comprender el fenómeno implica preguntarse qué se muestra, cómo se conecta y qué ideas pueden llegar a parecer cotidianas a partir de su circulación en las plataformas digitales.</p>
+    </div>
+  </section>
+
+
+  <section id="referencias">
+    <span class="section-label">referencias</span>
+    <h2 class="section-title">Referencias bibliográficas</h2>
+    <ul class="references-list">
+      <li>Baker, A., Chakraborty, D., &amp; McAdams, A. C. (2025). Revisiting the information hierarchy in the AI era: Implications of misinformation, ignorance, and imprudence. <em>Communications of the Association for Information Systems, 57</em>(1), 102–132. https://doi.org/10.17705/1cais.05705</li>
+      <li>Castelló-Martínez, A. (2026). Tradwives on social networks: Ideology and advertising. The case of RoRo on Instagram. <em>Comunicación y Sociedad</em>, 1–24. https://doi.org/10.32870/cys.v2026.9086</li>
+      <li>D'Ignazio, C., &amp; Klein, L. F. (2020). <em>Data feminism</em>. The MIT Press. https://doi.org/10.7551/mitpress/11805.001.0001</li>
+      <li>Rempel, C., &amp; Hannan, J. (2026). Making submission sexy again: The reactionary rhetoric of the tradwife movement. <em>Women's Studies in Communication</em>, 1–20. https://doi.org/10.1080/07491409.2026.2667234</li>
+      <li>Sykes, S., &amp; Hopner, V. (2024). TradWives: Right-wing social media influencers. <em>Journal of Contemporary Ethnography, 53</em>(4), 453–487. https://doi.org/10.1177/08912416241246273</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>La construcción y propagación del discurso tradwife en redes sociales</p>
+  </div>
+</footer>
+
+</body>
+</html>
