@@ -268,8 +268,7 @@
   .img-grid-2 { grid-template-columns: 1fr 1fr; }
   .img-grid-3 { grid-template-columns: repeat(3, 1fr); max-width: 540px; }
   .img-grid figure { margin: 0; }
-  .img-grid img,
-  .figures-block img {
+  .img-grid img {
     width: 100%;
     aspect-ratio: 9 / 16;
     height: auto;
@@ -279,10 +278,15 @@
     border-radius: 3px;
     background: var(--sage-wash);
   }
-  .figures-block {
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+  .figures-block img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--sage-wash);
   }
   figure.img-single img {
     width: 100%;
@@ -319,7 +323,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.6rem 1.2rem;
     margin: 1.8rem auto;
-    max-width: 400px;
+    max-width: 640px;
   }
   .figures-block figure { margin: 0; }
 
