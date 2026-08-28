@@ -268,6 +268,15 @@
   .img-grid-3 { grid-template-columns: repeat(3, 1fr); }
   .img-grid figure { margin: 0; }
   .img-grid img,
+  .figures-block img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--sage-wash);
+  }
   figure.img-single img {
     width: 100%;
     height: 100%;
@@ -282,6 +291,12 @@
     max-width: 560px;
   }
   figure.img-single.centered { margin-left: auto; margin-right: auto; }
+  figure.img-single.img-large {
+    max-width: 900px;
+  }
+  figure.img-single.img-large img {
+    height: auto;
+  }
   figcaption {
     font-family: var(--mono);
     font-size: 0.7rem;
@@ -566,7 +581,7 @@
       <p>Lo que los resultados permiten evidenciar es que el sistema de recomendaciones puede generar un espacio donde contenidos inicialmente asociados al entretenimiento, la belleza o el estilo de vida aparecen próximos a discursos de carácter ideológico. Así, la repetición y conexión entre publicaciones puede contribuir a que determinadas representaciones de feminidad y relaciones tradicionales adquieran mayor visibilidad dentro del entorno digital.</p>
     </div>
 
-    <figure class="img-single centered">
+    <figure class="img-single centered img-large">
         <img src="./img/img20.webp"/>
       <figcaption>Método de visualización</figcaption>
     </figure>
